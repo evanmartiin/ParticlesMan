@@ -1,0 +1,108 @@
+@use 'tools/breakpoints';
+@use 'tools/colors';
+@use 'tools/mixins';
+
+#canvas-wrapper,
+#canvas-wrapper canvas {
+	pointer-events: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	touch-action: none;
+}
+
+#canvas-wrapper {
+	z-index: -1;
+}
+
+html {
+	pointer-events: none;
+	color: colors.$white;
+
+	font-size: calc(100vw / 320);
+	// @include gt-america-mono;
+
+	@include breakpoints.tablet {
+		font-size: calc(100vw / 768);
+	}
+
+	@include breakpoints.desktop {
+		font-size: calc(100vw / 1024);
+	}
+
+	@include breakpoints.large {
+		font-size: calc(100vw / 1440);
+	}
+
+	@include breakpoints.xlarge {
+		font-size: calc(100vw / 1600);
+	}
+}
+
+#root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+	font-size: 11px;
+
+	width: 100vw;
+	height: 100vh;
+
+	#panel {
+		position: absolute;
+		top: 20px;
+		left: 50vw;
+		transform: translateX(-50%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 20px;
+		width: 400px;
+	}
+
+	#panel.hide {
+		transition: .5s;
+		opacity: 0;
+		width: 0;
+	}
+}
+
+#next {
+	position: absolute;
+	top: 50px;
+	left: 50px;
+}
+
+h1 {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: #1a1a1a;
+	cursor: pointer;
+	transition: border-color 0.25s;
+}
+button:hover {
+	border-color: #646cff;
+}
+
+body {
+	pointer-events: none;
+}
+
+#app {
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}

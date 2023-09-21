@@ -1,0 +1,24 @@
+@font-face {
+	font-family: 'RoadRage';
+	src: url('../assets/fonts/RoadRage.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@mixin font-brush {
+	font-family: 'RoadRage';
+}
+
+@font-face {
+	font-family: 'ModernGothic';
+	src: url('../assets/fonts/ModernGothic-BlackItalic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Anton';
+	src: url('../assets/fonts/Anton.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
