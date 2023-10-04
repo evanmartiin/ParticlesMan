@@ -60,9 +60,9 @@ class TensorflowCamera {
 	}
 
 	onKeyDown(key) {
-		// if (key === 'h') {
-		// 	this.videoDOM.style.display = this.videoDOM.style.display === 'none' ? 'block' : 'none';
-		// }
+		if (key === 'h') {
+			this.videoDOM.style.display = this.videoDOM.style.display === 'none' ? 'block' : 'none';
+		}
 	}
 
 	show() {

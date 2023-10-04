@@ -15,10 +15,6 @@ class TensorflowPose {
 		this.undetectedDuration = 0;
 	}
 
-	onFirstClick() {
-		this.enable();
-	}
-
 	enable() {
 		if (!this.detector) return;
 		this.ready = true;
@@ -31,25 +27,15 @@ class TensorflowPose {
 	}
 
 	async asyncInit() {
-		// if (app.tools.urlParams.has('tensorflow') && app.tools.urlParams.getString('tensorflow') === 'cpu') {
 		this.detector = await poseDetection
 			.createDetector(poseDetection.SupportedModels.BlazePose, {
 				runtime: 'mediapipe',
 				modelType: 'lite',
 				enableSmoothing: true,
-				// solutionPath: `/assets/pose`,
 				solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/pose',
 			})
 			.catch((err) => console.error(err));
-		this.runtime = 'mediapipe';
-		// } else {
-		// 	this.detector = await posedetection.createDetector(posedetection.SupportedModels.BlazePose, {
-		// 		runtime: 'tfjs',
-		// 		modelType: 'lite',
-		// 		enableSmoothing: true,
-		// 	});
-		// 	this.runtime = 'tfjs';
-		// }
+		this.enable();
 
 		this.loaded = true;
 	}
@@ -75,11 +61,6 @@ class TensorflowPose {
 				} else {
 					this.playerDetected = mostReliableRig;
 					state.emit(EVENTS.PLAYER_MOVED, mostReliableRig);
-
-					// TODO: filter moves to not count really small moves and big moves (teleportations)
-					if (this.isMoveEnough(mostReliableRig.keypoints3D)) {
-						state.emit(EVENTS.PLAYER_MOVED_ENOUGH, mostReliableRig);
-					}
 				}
 			} else {
 				if (this.playerDetected) {
@@ -120,25 +101,6 @@ class TensorflowPose {
 		}
 
 		return poses;
-	}
-
-	isMoveEnough(poses) {
-		if (!poses) return false;
-		if (!this.lastPoses) {
-			this.lastPoses = poses;
-			return false;
-		}
-		if (!poses) return false;
-
-		const isMoveEnough = poses.some((pose, index) => {
-			const lastPose = this.lastPoses[index];
-			if (!lastPose) return false;
-			const distance = new Vector3(pose.x, pose.y, pose.z).distanceTo(new Vector3(lastPose.x, lastPose.y, lastPose.z));
-			return distance > DISTANCE_THRESHOLD;
-		});
-
-		this.lastPoses = poses;
-		return isMoveEnough;
 	}
 }
 

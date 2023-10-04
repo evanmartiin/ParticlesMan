@@ -1,6 +1,5 @@
 uniform float uTime;
 uniform float uSpeed;
-uniform float uAttraction;
 uniform float uCurlSize;
 uniform float uTimeScale;
 uniform sampler2D uRigPositionTexture;
@@ -141,12 +140,12 @@ void main() {
 	vec3 velocity = vec3(0.0);
 
 	velocity += rigPosition * 75. - position;
-	velocity *= uSpeed;
 	velocity = curl(position * uCurlSize, uTime * uTimeScale, 0.1 + (1.0 - life) * 0.1) * 0.25;
 
 	if(life < 0.15) {
 		velocity = curl(position * uCurlSize * 0.5, uTime * uTimeScale, 0.1 + (1.0 - life) * 0.1);
 	}
+	velocity *= uSpeed;
 
 	gl_FragColor = vec4(velocity, life);
 }

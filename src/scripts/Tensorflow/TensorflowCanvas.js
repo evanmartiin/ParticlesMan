@@ -28,9 +28,9 @@ class TensorflowCanvas {
 	}
 
 	onKeyDown(key) {
-		// if (key === 'h') {
-		// 	this.canvasDOM.style.display = this.canvasDOM.style.display === 'none' ? 'block' : 'none';
-		// }
+		if (key === 'h') {
+			this.canvasDOM.style.display = this.canvasDOM.style.display === 'none' ? 'block' : 'none';
+		}
 	}
 
 	clearCtx() {

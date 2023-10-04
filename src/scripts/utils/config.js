@@ -2,8 +2,6 @@ const debug = import.meta.env.CYPHER_DEBUG === 'true';
 const env = import.meta.env.MODE;
 const url = new URLSearchParams(window.location.search);
 
-const INSTALL = import.meta.env.CYPHER_INSTALL === 'true' || url.has('install');
-
 const DEBUG = env === 'development' ? url.has('debug') && debug : debug;
 
 const BREAKPOINTS = {
@@ -12,4 +10,4 @@ const BREAKPOINTS = {
 	large: 1441,
 };
 
-export { DEBUG, BREAKPOINTS, INSTALL };
+export { DEBUG, BREAKPOINTS };

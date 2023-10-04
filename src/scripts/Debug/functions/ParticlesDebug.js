@@ -4,10 +4,10 @@ function createPane(pane, instance, name) {
 	const folder = pane.addFolder({ title: name, expanded: false });
 
 	instance.PARAMS = {
-		uCurlSize: 0,
-		uCurlStrength: 0,
-		uCurlChangeSpeed: 0,
-		uDieSpeed: 0,
+		uCurlSize: 0.04,
+		uSpeed: 1,
+		uDieSpeed: 0.02,
+		uScale: 1,
 		particleGeometry: 0,
 	};
 
@@ -20,23 +20,10 @@ function createPane(pane, instance, name) {
 
 	folder
 		.addInput(instance.PARAMS, 'uCurlSize', {
-			min: 0.05,
+			min: 0.01,
 			max: 0.5,
 			step: 0.01,
-		})
-		.on('change', update);
-	folder
-		.addInput(instance.PARAMS, 'uCurlStrength', {
-			min: 0.003,
-			max: 0.03,
-			step: 0.001,
-		})
-		.on('change', update);
-	folder
-		.addInput(instance.PARAMS, 'uCurlChangeSpeed', {
-			min: 0,
-			max: 1,
-			step: 0.01,
+			label: 'Noise Size',
 		})
 		.on('change', update);
 	folder
@@ -44,6 +31,23 @@ function createPane(pane, instance, name) {
 			min: 0.01,
 			max: 0.1,
 			step: 0.01,
+			label: 'Die Speed',
+		})
+		.on('change', update);
+	folder
+		.addInput(instance.PARAMS, 'uSpeed', {
+			min: 0.01,
+			max: 2,
+			step: 0.01,
+			label: 'Particule Speed',
+		})
+		.on('change', update);
+	folder
+		.addInput(instance.PARAMS, 'uScale', {
+			min: 0.01,
+			max: 10,
+			step: 0.01,
+			label: 'Particule Scale',
 		})
 		.on('change', update);
 
@@ -59,15 +63,15 @@ function createPane(pane, instance, name) {
 		.on('change', updateGeometry);
 
 	function update() {
-		if (!instance.velocityUniforms) return;
-		instance.velocityVariable.material.uniforms.uCurlSize.value = instance.PARAMS.uCurlSize;
-		instance.velocityVariable.material.uniforms.uCurlStrength.value = instance.PARAMS.uCurlStrength;
-		instance.velocityVariable.material.uniforms.uCurlChangeSpeed.value = instance.PARAMS.uCurlChangeSpeed;
-		instance.velocityVariable.material.uniforms.uDieSpeed.value = instance.PARAMS.uDieSpeed;
+		if (!instance.sim.velUniforms || !instance.sim.posUniforms) return;
+		instance.sim.velUniforms.uCurlSize.value = instance.PARAMS.uCurlSize;
+		instance.sim.velUniforms.uSpeed.value = instance.PARAMS.uSpeed;
+		instance.sim.posUniforms.uDieSpeed.value = instance.PARAMS.uDieSpeed;
+		instance.material.uniforms.uScale.value = instance.PARAMS.uScale;
 	}
 
 	function updateGeometry() {
-		instance.particles.geometry = instance.createParticleGeometry(geometries[instance.PARAMS.particleGeometry]);
+		instance.changeGeometry(geometries[instance.PARAMS.particleGeometry]);
 	}
 
 	return folder;

@@ -4,14 +4,11 @@ class State {
 	/** @type State */
 	static instance;
 	#listeners;
-	#onceListeners;
 	#cache;
 	#instances;
 	constructor() {
 		/** @type Map<number, Set> */
 		this.#listeners = new Map();
-		/** @type Map<number, Set> */
-		this.#onceListeners = new Map();
 
 		this.#cache = new Map();
 		this.#instances = new Set();
@@ -21,26 +18,11 @@ class State {
 	 *
 	 * @param {number} id defined in the constants file
 	 * @param {(...any)=> any} fn callback function
-	 * @param {{once?: boolean}} params
 	 */
-	on(id, fn, params = {}) {
-		if (!params.once && !this.#listeners.has(id)) this.#listeners.set(id, new Set());
-		if (params.once && !this.#onceListeners.has(id)) this.#onceListeners.set(id, new Set());
+	on(id, fn) {
+		if (!this.#listeners.has(id)) this.#listeners.set(id, new Set());
 
-		(params.once ? this.#onceListeners : this.#listeners).get(id).add(fn);
-	}
-
-	/**
-	 *
-	 * @param {number} id defined in the constants file
-	 * @param {(...any)=> any} fn callback function
-	 * @returns
-	 */
-	off(id, fn) {
-		if (!this.#listeners.has(id)) return;
-
-		const listeners = this.#listeners.get(id);
-		listeners.delete(fn);
+		this.#listeners.get(id).add(fn);
 	}
 
 	/**
@@ -49,14 +31,6 @@ class State {
 	 */
 	register(instance) {
 		this.#instances.add(instance);
-	}
-
-	/**
-	 *
-	 * @param {*} instance the class instance
-	 */
-	unregister(instance) {
-		this.#instances.delete(instance);
 	}
 
 	/**
@@ -70,11 +44,6 @@ class State {
 
 		// Neeeded to emit the event on all the instances
 		this.#instances.forEach((instance) => this.#fireMethod(instance, id));
-
-		if (this.#onceListeners.has(id)) {
-			for (const fn of this.#onceListeners.get(id)) fn.call(this, ...args);
-			this.#onceListeners.delete(id);
-		}
 	}
 
 	#fireMethod(instance, id) {

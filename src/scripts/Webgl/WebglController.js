@@ -13,28 +13,15 @@ class WebglController {
 		this.renderer = new Renderer();
 		this.scene = new MainScene();
 		this.camera = new MainCamera();
-		this.postProcessing = new PostProcessing(this.renderer.capabilities.isWebGL2, this.renderer, this.scene, this.camera);
+		this.postProcessing = new PostProcessing(this.renderer, this.scene, this.camera);
 	}
 
 	onAttach() {
 		app.$wrapper.prepend(this.renderer.domElement);
 	}
 
-	onResize() {}
-
 	onTick({ et }) {
 		globalUniforms.uTime.value = et;
-	}
-
-	onRender() {
-		// this.renderer.clear();
-		// this.renderer.setRenderTarget(this.postProcessing.renderTarget);
-		// this.renderer.clear();
-		// this.renderer.render(this.scene, this.camera);
-		// this.renderer.setRenderTarget(null);
-		// this.composer.render();
-		// this.renderer.render(this.postProcessing.quad, this.postProcessing.camera);
-		// this.effectComposer.render();
 	}
 }
 

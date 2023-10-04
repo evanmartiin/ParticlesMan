@@ -10,8 +10,7 @@
 		"dev": "vite -m development -c config/vite.config.js",
 		"build": "vite build -m production -c config/vite.config.js",
 		"staging": "vite build -m staging -c config/vite.config.js",
-		"preview": "vite preview -c config/vite.config.js",
-		"build-assets": "sh ./assets/audio/create-spritesheet.sh"
+		"preview": "vite preview -c config/vite.config.js"
 	},
 	"devDependencies": {
 		"@trivago/prettier-plugin-sort-imports": "^4.0.0",
@@ -30,9 +29,6 @@
 	"dependencies": {
 		"@types/three": "0.149.0",
 		"gsap": "^3.11.5",
-		"howler": "^2.2.3",
-		"postprocessing": "^6.30.2",
-		"socket.io-client": "^4.6.1",
 		"three": "^0.149.0",
 		"three-custom-shader-material": "5.2.1"
 	}

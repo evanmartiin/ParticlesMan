@@ -14,15 +14,25 @@ class MainCamera extends PerspectiveCamera {
 		this.position.z = 7;
 		this.position.y = 1.5;
 		this.lookAt(this.target);
-	}
 
-	onAttach() {
-		app.debug?.mapping.add(this, 'Camera');
+		this.toggleOrbit();
 	}
 
 	onResize({ ratio }) {
 		this.aspect = ratio;
 		this.fov = this.baseFov / Math.min(1, ratio * 1.5);
+		this.updateProjectionMatrix();
+	}
+
+	async toggleOrbit() {
+		const OrbitThree = await import('three/addons/controls/OrbitControls.js');
+		this.orbitControls = new OrbitThree.OrbitControls(this, app.$wrapper);
+		this.orbitControls.enableDamping = true;
+		this.orbitControls.dampingFactor = 0.15;
+		this.orbitControls.enableZoom = true;
+		this.orbitControls.target.copy(app.webgl.camera.target);
+		this.orbitControls.update();
+		this.far = 200;
 		this.updateProjectionMatrix();
 	}
 }

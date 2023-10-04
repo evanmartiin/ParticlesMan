@@ -12,7 +12,6 @@ class TensorflowController {
 		this.canvas = new TensorflowCanvas();
 
 		this.show();
-		this.pose.enable();
 	}
 
 	show() {

@@ -17,7 +17,6 @@
     "^@utils/(.*)$",
     "^@scripts/(.*)$",
     "^@styles/(.*)$",
-    "^@assets/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": false,

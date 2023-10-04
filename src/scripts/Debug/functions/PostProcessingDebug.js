@@ -1,37 +1,31 @@
 function createPane(pane, instance, name) {
 	const folder = pane.addFolder({ title: name, expanded: false });
 
-	const bloomPass = folder.addFolder({ title: 'Bloom Pass' });
-	bloomPass.addInput(instance._bloomPass, 'strength', {
+	folder.addInput(instance, 'enabled', { label: 'Enabled' });
+
+	const bloomPass = folder.addFolder({ title: 'Bloom Pass', expanded: false });
+	bloomPass.addInput(instance.bloomPass, 'strength', {
 		min: 0,
 		max: 5,
+		label: 'Strength',
 	});
-	bloomPass.addInput(instance._bloomPass, 'radius', {
+	bloomPass.addInput(instance.bloomPass, 'radius', {
 		min: 0,
 		max: 1.5,
+		label: 'Radius',
 	});
-	bloomPass.addInput(instance._bloomPass, 'threshold', {
+	bloomPass.addInput(instance.bloomPass, 'threshold', {
 		min: 0,
 		max: 1,
+		label: 'Threshold',
 	});
 
-	const afterImage = folder.addFolder({ title: 'After Image' });
-	afterImage.addInput(instance._afterImagePass.uniforms['damp'], 'value', {
+	const afterImage = folder.addFolder({ title: 'After Image', expanded: false });
+	afterImage.addInput(instance.afterImagePass.uniforms['damp'], 'value', {
 		min: 0,
 		max: 1,
+		label: 'Strength',
 	});
-
-	// const fishEyes = folder.addFolder({ title: 'fishEyes Pass' });
-	// fishEyes.addInput(instance._fishEyesPass.uniforms['strength'], 'value', {
-	// 	min: 0,
-	// 	max: 2,
-	// 	label: 'Strength',
-	// });
-	// fishEyes.addInput(instance._fishEyesPass.uniforms['cylindricalRatio'], 'value', {
-	// 	min: 0,
-	// 	max: 5,
-	// 	label: 'CylindricalRatio',
-	// });
 
 	return folder;
 }

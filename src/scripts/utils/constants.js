@@ -3,15 +3,12 @@ let i = 0;
 const EVENTS = {
 	LOADER_PROGRESS: i++,
 
-	FIRST_CLICK: i++,
 	ATTACH: i++,
 	RESIZE: i++,
 
 	TICK: i++,
 	RENDER: i++,
 
-	MOUSE_MOVE: i++,
-	POINTER_UP: i++,
 	POINTER_DOWN: i++,
 
 	KEY_DOWN: i++,
@@ -19,7 +16,6 @@ const EVENTS = {
 	PLAYER_ENTERED: i++,
 	PLAYER_LEFT: i++,
 	PLAYER_MOVED: i++,
-	PLAYER_MOVED_ENOUGH: i++,
 };
 
 const EVENTS_MAP = Object.fromEntries(

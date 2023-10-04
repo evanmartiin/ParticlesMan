@@ -57,8 +57,7 @@ export class GPUSimulation {
 
 		this.velUniforms.uTime = { value: globalUniforms.uTime.value };
 		this.velUniforms.uDelta = { value: 0.0 };
-		this.velUniforms.uSpeed = { value: 0.01 };
-		this.velUniforms.uAttraction = { value: 1 };
+		this.velUniforms.uSpeed = { value: 1 };
 		this.velUniforms.uCurlSize = { value: 0.04 };
 		this.velUniforms.uTimeScale = { value: 0.5 };
 		this.velUniforms.uRigPositionTexture = { value: new Texture() };
@@ -79,9 +78,5 @@ export class GPUSimulation {
 			this.posUniforms.uRigPositionTexture.value = app.webgl.scene.avatar.vertexStore.positionMap;
 			this.velUniforms.uRigPositionTexture.value = app.webgl.scene.avatar.vertexStore.positionMap;
 		}
-	}
-
-	onEnergyChanged(energy) {
-		this.posUniforms.uDieSpeed.value = 0.04 - 0.03 * energy;
 	}
 }

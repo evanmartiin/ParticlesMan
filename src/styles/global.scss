@@ -1,6 +1,4 @@
 @use 'tools/breakpoints';
-@use 'tools/colors';
-@use 'tools/mixins';
 
 #canvas-wrapper,
 #canvas-wrapper canvas {
@@ -20,7 +18,7 @@
 
 html {
 	pointer-events: none;
-	color: colors.$white;
+	color: white;
 
 	font-size: calc(100vw / 320);
 	// @include gt-america-mono;
@@ -71,38 +69,33 @@ html {
 	}
 }
 
-#next {
-	position: absolute;
-	top: 50px;
-	left: 50px;
-}
-
-h1 {
-	margin: 0;
-	padding: 0;
-}
-
-button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
-}
-button:hover {
-	border-color: #646cff;
-}
-
 body {
 	pointer-events: none;
+	overflow: hidden;
 }
 
 #app {
 	width: 100%;
 	height: 100%;
 	pointer-events: none;
+}
+
+#tf-video,
+#tf-canvas {
+	position: absolute;
+	bottom: 50px;
+	left: 50px;
+	box-sizing: content-box;
+	transform: scale(0.5) translateX(-50%) translateY(50%) rotateY(180deg);
+	-webkit-transform: scale(0.5) translateX(-50%) translateY(50%) rotateY(180deg);
+	-moz-transform: scale(0.5) translateX(-50%) translateY(50%) rotateY(180deg);
+	opacity: 1;
+	transition: opacity 0.5s ease-in-out;
+
+	&.hide {
+		opacity: 0;
+	}
+}
+#tf-video {
+	border: 5px solid white;
 }

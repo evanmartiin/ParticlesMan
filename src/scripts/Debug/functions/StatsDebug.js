@@ -9,7 +9,7 @@ import { state } from '@scripts/State.js';
  * @returns
  */
 function createPane(pane, instance, name) {
-	const folder = pane.addFolder({ title: name, expanded: true });
+	const folder = pane.addFolder({ title: name, expanded: false });
 
 	folder.addMonitor(instance.info.memory, 'geometries', { label: 'Geometries' });
 	folder.addMonitor(instance.info.memory, 'textures', { label: 'Textures' });
@@ -24,6 +24,6 @@ function createPane(pane, instance, name) {
 	return folder;
 }
 
-function debug(instance) {}
+function debug() {}
 
 export { createPane, debug };

@@ -8,16 +8,12 @@
 		"baseUrl": ".",
 		"paths": {
 			"@styles/*": ["./src/styles/*"],
-			"@assets/*": ["./src/assets/*"],
-			"@views/*": ["./src/views/*"],
 			"@Core/*": ["./src/scripts/Core/*"],
 			"@Dom/*": ["./src/scripts/Dom/*"],
 			"@Debug/*": ["./src/scripts/Debug/*"],
 			"@Tools/*": ["./src/scripts/Tools/*"],
 			"@utils/*": ["./src/scripts/utils/*"],
-			"@vendors/*": ["./src/scripts/vendors/*"],
 			"@Webgl/*": ["./src/scripts/Webgl/*"],
-			"@Timeline/*": ["./src/scripts/Timeline/*"],
 			"@scripts/*": ["./src/scripts/*"]
 		}
 	},

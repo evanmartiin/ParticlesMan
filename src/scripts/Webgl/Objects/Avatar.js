@@ -115,8 +115,6 @@ class Avatar extends Group {
 		this.quad.position.x = 0.35;
 		this.quad.position.z = -1;
 		// app.webgl.scene.add(this.quad);
-
-		app.debug?.mapping.add(this, 'Particles');
 	}
 
 	onPlayerMoved(rig) {
@@ -148,6 +146,10 @@ class Avatar extends Group {
 		this.tubes.instanceMatrix.needsUpdate = true;
 
 		this.head.position.set(1 - rig.keypoints[POSE.NOSE].x / VIDEO_SIZE.width, 1 - rig.keypoints[POSE.NOSE].y / VIDEO_SIZE.height, 0.0);
+		const leftHearV2 = new Vector2(1 - rig.keypoints[POSE.LEFT_EAR].x / VIDEO_SIZE.width, 1 - rig.keypoints[POSE.LEFT_EAR].y / VIDEO_SIZE.height);
+		const rightHearV2 = new Vector2(1 - rig.keypoints[POSE.RIGHT_EAR].x / VIDEO_SIZE.width, 1 - rig.keypoints[POSE.RIGHT_EAR].y / VIDEO_SIZE.height);
+		const hearsDist = leftHearV2.distanceTo(rightHearV2) * 10 + 1;
+		this.head.scale.setScalar(hearsDist);
 
 		const topLeftTorso = new Vector2(1 - rig.keypoints[POSE.LEFT_SHOULDER].x / VIDEO_SIZE.width, 1 - rig.keypoints[POSE.LEFT_SHOULDER].y / VIDEO_SIZE.height);
 		const topRightTorso = new Vector2(1 - rig.keypoints[POSE.RIGHT_SHOULDER].x / VIDEO_SIZE.width, 1 - rig.keypoints[POSE.RIGHT_SHOULDER].y / VIDEO_SIZE.height);
