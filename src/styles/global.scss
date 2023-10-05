@@ -82,8 +82,6 @@ body {
 #tf-video,
 #tf-canvas {
 	position: absolute;
-	bottom: 50px;
-	left: 50px;
 	box-sizing: content-box;
 	transform: scale(0.5) translateX(-50%) translateY(50%) rotateY(180deg);
 	-webkit-transform: scale(0.5) translateX(-50%) translateY(50%) rotateY(180deg);
@@ -96,7 +94,14 @@ body {
 	}
 }
 #tf-video {
-	border: 5px solid white;
+	border: 20px solid hsla(0, 0%, 10%, 1);
+	border-radius: 10px;
+	bottom: 50px;
+	left: 50px;
+}
+#tf-canvas {
+	bottom: 60px;
+	left: 60px;
 }
 
 #mobile {
@@ -117,4 +122,16 @@ body {
 	text-align: center;
 	padding: 35px;
 	display: none;
+}
+
+#infos {
+	position: absolute;
+	top: 20px;
+	right: 290px;
+	z-index: 10000;
+	font-size: 15px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	text-align: center;
+	opacity: .8;
+	text-align: right;
 }

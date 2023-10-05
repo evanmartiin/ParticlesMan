@@ -10,7 +10,6 @@ const EVENTS = {
 	RENDER: i++,
 
 	POINTER_DOWN: i++,
-
 	KEY_DOWN: i++,
 
 	PLAYER_ENTERED: i++,

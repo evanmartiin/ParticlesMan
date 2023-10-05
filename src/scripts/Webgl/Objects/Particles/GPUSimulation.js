@@ -68,6 +68,11 @@ export class GPUSimulation {
 		}
 	}
 
+	dispose() {
+		this.gpuCompute.variables.forEach((variable) => variable.material.dispose());
+		this.gpuCompute.dispose();
+	}
+
 	onRender({ dt }) {
 		let deltaRatio = 60 * dt;
 		deltaRatio = Math.min(deltaRatio, 0.6);

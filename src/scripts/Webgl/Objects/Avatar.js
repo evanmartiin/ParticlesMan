@@ -11,7 +11,6 @@ import {
 	Mesh,
 	NearestFilter,
 	Object3D,
-	PlaneGeometry,
 	RGBAFormat,
 	Scene,
 	ShaderMaterial,
@@ -37,12 +36,6 @@ class Avatar extends Group {
 	}
 
 	onAttach() {
-		// this.scene = new Scene();
-		// this.camera = new PerspectiveCamera();
-		// this.camera.position.set(0.5, 0.5, 1);
-		// this.camera.lookAt(0.5, 0.5, 0);
-		// this.fbo = new WebGLRenderTarget(512, 512, { magFilter: NearestFilter, type: HalfFloatType });
-
 		this.wPosMaterial = new ShaderMaterial({
 			vertexShader: `
 				varying vec4 vPosition;
@@ -83,38 +76,7 @@ class Avatar extends Group {
 		this.torso = new InstancedMesh(new CylinderGeometry(0.01, 0.01, 1, 25, 25), this.wPosMaterialInstanced, TORSO_CYLINDER_NB);
 		this.torso.instanceMatrix.setUsage(DynamicDrawUsage);
 
-		// this.scene.add(this.head, this.tubes, this.torso);
-
 		this.addParticles();
-
-		this.quad = new Mesh(
-			new PlaneGeometry(VIDEO_SIZE.width * 0.0005, VIDEO_SIZE.height * 0.0005),
-			new ShaderMaterial({
-				vertexShader: `
-				varying vec2 vUv;
-		void main() {
-			gl_Position = projectionMatrix * modelMatrix * vec4(position, 1.0);
-			vUv = uv;
-		}
-		`,
-				fragmentShader: `
-		uniform sampler2D tTex;
-		varying vec2 vUv;
-
-		void main() {
-			gl_FragColor = texture2D(tTex, vUv);
-		}
-		`,
-				uniforms: {
-					// tTex: { value: this.fbo.texture },
-					tTex: { value: this.vertexStore.positionMap },
-				},
-			}),
-		);
-		this.quad.position.y = -0.2;
-		this.quad.position.x = 0.35;
-		this.quad.position.z = -1;
-		// app.webgl.scene.add(this.quad);
 	}
 
 	onPlayerMoved(rig) {
@@ -180,13 +142,6 @@ class Avatar extends Group {
 
 	onRender() {
 		if (this.vertexStore) this.vertexStore.update();
-
-		// if (this.scene && app.webgl.camera) {
-		// 	app.webgl.renderer.setRenderTarget(this.fbo);
-		// 	app.webgl.renderer.clear(true, true, false);
-		// 	app.webgl.renderer.render(this.scene, this.camera);
-		// 	app.webgl.renderer.setRenderTarget(null);
-		// }
 	}
 
 	addParticles() {

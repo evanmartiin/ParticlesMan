@@ -101,6 +101,12 @@ export class Particles extends Group {
 		this.show();
 	}
 
+	changeQuantity(quantity) {
+		this.size = quantity;
+		this.sim.dispose();
+		this.sim = new GPUSimulation(app.webgl.renderer, this.size);
+	}
+
 	onRender() {
 		if (!this.material) return;
 

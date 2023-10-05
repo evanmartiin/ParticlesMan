@@ -12,7 +12,6 @@ class Mouse {
 		app.$app.addEventListener('pointerdown', this.#pointerDown);
 
 		app.$app.addEventListener('mouseup', this.#pointerUp);
-		app.$app.addEventListener('touchend', this.#pointerUp);
 		app.$app.addEventListener('pointerleave', this.#pointerUp);
 	}
 

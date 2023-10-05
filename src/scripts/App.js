@@ -17,8 +17,11 @@ class App {
 			return;
 		}
 
+		state.register(this);
+
 		this.$app = document.getElementById('app');
 		this.$wrapper = document.getElementById('canvas-wrapper');
+		this.$infos = document.getElementById('infos');
 
 		this.core = createCoreModules();
 		this.tools = createToolsModules();
@@ -35,6 +38,10 @@ class App {
 	static getInstance() {
 		if (!App.instance) App.instance = new App();
 		return App.instance;
+	}
+
+	onKeyDown(key) {
+		if (key === 'h') this.$infos.style.display = this.$infos.style.display === 'none' ? 'block' : 'none';
 	}
 }
 const app = App.getInstance();

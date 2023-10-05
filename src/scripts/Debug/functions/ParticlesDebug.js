@@ -9,6 +9,7 @@ function createPane(pane, instance, name) {
 		uDieSpeed: 0.02,
 		uScale: 1,
 		particleGeometry: 0,
+		quantity: 256,
 	};
 
 	const geometries = [new OctahedronGeometry(1, 0).scale(5, 1, 1), new BoxGeometry(), new SphereGeometry(1, 5, 5), new ConeGeometry(1, 5)];
@@ -58,6 +59,19 @@ function createPane(pane, instance, name) {
 		})
 		.on('change', updateGeometry);
 
+	folder
+		.addInput(instance.PARAMS, 'quantity', {
+			options: {
+				'16k': 128,
+				'65k': 256,
+				'262k': 512,
+				'1M': 1024,
+				'4M': 2048,
+			},
+			label: 'Quantity',
+		})
+		.on('change', updateQuantity);
+
 	function update() {
 		if (!instance.sim.velUniforms || !instance.sim.posUniforms) return;
 		instance.sim.velUniforms.uCurlSize.value = instance.PARAMS.uCurlSize;
@@ -68,6 +82,11 @@ function createPane(pane, instance, name) {
 
 	function updateGeometry() {
 		instance.changeGeometry(geometries[instance.PARAMS.particleGeometry]);
+		update();
+	}
+
+	function updateQuantity() {
+		instance.changeQuantity(instance.PARAMS.quantity);
 		update();
 	}
 

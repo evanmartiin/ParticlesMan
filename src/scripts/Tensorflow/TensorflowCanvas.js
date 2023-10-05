@@ -47,20 +47,20 @@ class TensorflowCanvas {
 
 	drawKeypoints(keypoints) {
 		const keypointInd = poseDetection.util.getKeypointIndexBySide(poseDetection.SupportedModels.BlazePose);
-		this.ctx.fillStyle = 'Red';
-		this.ctx.strokeStyle = 'White';
-		this.ctx.lineWidth = 2;
+		this.ctx.fillStyle = 'rgb(230, 50, 50)';
+		this.ctx.strokeStyle = 'rgb(230, 50, 50)';
+		this.ctx.lineWidth = 5;
 
 		for (const i of keypointInd.middle) {
 			this.drawKeypoint(keypoints[i]);
 		}
 
-		this.ctx.fillStyle = 'Green';
+		this.ctx.strokeStyle = 'rgb(100, 157, 227)';
 		for (const i of keypointInd.left) {
 			this.drawKeypoint(keypoints[i]);
 		}
 
-		this.ctx.fillStyle = 'Orange';
+		this.ctx.strokeStyle = 'rgb(242, 153, 236)';
 		for (const i of keypointInd.right) {
 			this.drawKeypoint(keypoints[i]);
 		}
@@ -79,9 +79,8 @@ class TensorflowCanvas {
 	}
 
 	drawSkeleton(keypoints) {
-		this.ctx.fillStyle = 'White';
-		this.ctx.strokeStyle = 'Red';
-		this.ctx.lineWidth = 2;
+		this.ctx.strokeStyle = 'rgb(230, 50, 50)';
+		this.ctx.lineWidth = 5;
 
 		poseDetection.util.getAdjacentPairs(poseDetection.SupportedModels.BlazePose).forEach(([i, j]) => {
 			const kp1 = keypoints[i];

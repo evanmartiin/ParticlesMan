@@ -39,6 +39,10 @@ void main() {
   transformedPos.y += positionTexture.y;
   transformedPos.z += positionTexture.z;
 
+  if (positionTexture.r < 15. && positionTexture.g < 15. && positionTexture.b < 15.) {
+    transformedPos = vec3(100.);
+  }
+
   csm_Normal *= particleRotation;
 
   csm_PositionRaw = projectionMatrix * modelViewMatrix * vec4(transformedPos, 1.0);

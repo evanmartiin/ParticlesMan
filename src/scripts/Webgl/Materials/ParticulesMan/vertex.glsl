@@ -20,7 +20,6 @@ void main() {
   #include <skinning_vertex>
 
   // Position this vertex so that it occupies a unique pixel.
-  // Might not work in some environments...?
   // https://stackoverflow.com/questions/29053870/retrieve-vertices-data-in-three-js
   // https://stackoverflow.com/questions/20601886/does-gl-position-set-the-center-of-the-rectangle-when-using-gl-points
   #ifdef USE_INSTANCING
@@ -37,6 +36,6 @@ void main() {
   vWorldPosition = modelMatrix * vec4(transformed, 1.0);
   #ifdef USE_INSTANCING
   vWorldPosition = modelMatrix * instanceMatrix * vec4(transformed, 1.0);
-  // vWorldPosition *= aBoneVisible;
+  vWorldPosition *= aBoneVisible;
   #endif
 }
