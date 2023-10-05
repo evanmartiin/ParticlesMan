@@ -11,13 +11,13 @@ const BREAKPOINTS = {
 };
 
 function isiOS() {
-	return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+	return /iPhone|iPod/i.test(navigator.userAgent);
 }
 
 function isAndroid() {
 	return /Android/i.test(navigator.userAgent);
 }
 
-const ISMOBILE = isAndroid() || isiOS();
+const isMobile = () => isAndroid() || isiOS();
 
-export { DEBUG, BREAKPOINTS, ISMOBILE };
+export { DEBUG, BREAKPOINTS, isMobile };

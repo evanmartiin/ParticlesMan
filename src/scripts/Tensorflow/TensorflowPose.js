@@ -1,4 +1,3 @@
-import { ISMOBILE } from '@utils/config.js';
 import { EVENTS } from '@utils/constants.js';
 import { app } from '@scripts/App.js';
 import { state } from '@scripts/State.js';
@@ -10,8 +9,7 @@ const UNDETECTION_DURATION = 2;
 class TensorflowPose {
 	constructor() {
 		state.register(this);
-		console.log(ISMOBILE);
-		this.asyncInit(ISMOBILE ? 'tfjs' : 'mediapipe', 'lite');
+		this.asyncInit('mediapipe', 'lite');
 		this.undetectedDuration = 0;
 	}
 

@@ -2,6 +2,7 @@ import { createCoreModules } from '@Core/index.js';
 import { WebglController } from '@Webgl/WebglController.js';
 import { createToolsModules } from '@Tools/index.js';
 import { createDebugModules } from '@Debug/index.js';
+import { isMobile } from '@utils/config.js';
 import { EVENTS } from '@utils/constants.js';
 import { state } from './State.js';
 import { TensorflowController } from './Tensorflow/TensorflowController.js';
@@ -11,6 +12,11 @@ class App {
 	static instance;
 
 	async init() {
+		if (isMobile()) {
+			document.getElementById('mobile').style.display = 'flex';
+			return;
+		}
+
 		this.$app = document.getElementById('app');
 		this.$wrapper = document.getElementById('canvas-wrapper');
 
