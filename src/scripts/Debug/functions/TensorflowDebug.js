@@ -1,8 +1,10 @@
+import { ISMOBILE } from '@utils/config.js';
+
 function createPane(pane, instance, name) {
 	const folder = pane.addFolder({ title: name, expanded: false });
 
 	instance.PARAMS = {
-		backend: 'mediapipe',
+		backend: ISMOBILE ? 'tfjs' : 'mediapipe',
 		quality: 'lite',
 	};
 
