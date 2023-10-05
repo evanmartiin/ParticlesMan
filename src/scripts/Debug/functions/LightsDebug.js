@@ -17,7 +17,6 @@ function createPane(pane, instance, name) {
 		min: -10,
 		max: 10,
 	});
-	light1.addInput(instance.lights.helper1, 'visible', { label: 'helper' });
 	light1.addInput(instance.lights.light1, 'intensity', {
 		min: 0,
 		max: 5,
@@ -40,7 +39,6 @@ function createPane(pane, instance, name) {
 		min: -10,
 		max: 10,
 	});
-	light2.addInput(instance.lights.helper2, 'visible', { label: 'helper' });
 	light2.addInput(instance.lights.light2, 'intensity', {
 		min: 0,
 		max: 5,
@@ -63,7 +61,6 @@ function createPane(pane, instance, name) {
 		min: -10,
 		max: 10,
 	});
-	light3.addInput(instance.lights.helper3, 'visible', { label: 'helper' });
 	light3.addInput(instance.lights.light3, 'intensity', {
 		min: 0,
 		max: 5,
@@ -71,15 +68,6 @@ function createPane(pane, instance, name) {
 
 	params.color3 = '#' + instance.lights.light3.color.getHexString();
 	light3.addInput(params, 'color3', { view: 'color' }).on('change', ({ value }) => instance.lights.light3.color.set(value));
-
-	const light4 = folder.addFolder({ title: 'Ambient light' });
-	light4.addInput(instance.lights.light4, 'intensity', {
-		min: 0,
-		max: 5,
-	});
-
-	params.color3 = '#' + instance.lights.light4.color.getHexString();
-	light4.addInput(params, 'color3', { view: 'color' }).on('change', ({ value }) => instance.lights.light4.color.set(value));
 
 	folder.addButton({ title: 'Copy params', index: 0 }).on('click', () => {
 		navigator.clipboard.writeText(
@@ -109,14 +97,6 @@ function createPane(pane, instance, name) {
 						r: instance.lights.light3.color.r,
 						g: instance.lights.light3.color.g,
 						b: instance.lights.light3.color.b,
-					},
-				},
-				light4: {
-					intensity: instance.lights.light4.intensity,
-					color: {
-						r: instance.lights.light4.color.r,
-						g: instance.lights.light4.color.g,
-						b: instance.lights.light4.color.b,
 					},
 				},
 			}),

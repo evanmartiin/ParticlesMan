@@ -1,9 +1,7 @@
-import { Vector3 } from 'three';
 import { EVENTS } from '@utils/constants.js';
 import { app } from '@scripts/App.js';
 import { state } from '@scripts/State.js';
 
-const DISTANCE_THRESHOLD = 0.035;
 const DETECTION_THRESHOLD = 0.4;
 const UNDETECTION_THRESHOLD = 0.3;
 const UNDETECTION_DURATION = 2;
@@ -11,8 +9,12 @@ const UNDETECTION_DURATION = 2;
 class TensorflowPose {
 	constructor() {
 		state.register(this);
-		this.asyncInit();
+		this.asyncInit('mediapipe', 'lite');
 		this.undetectedDuration = 0;
+	}
+
+	onAttach() {
+		app?.debug.mapping.add(this, 'Tensorflow');
 	}
 
 	enable() {
@@ -26,18 +28,26 @@ class TensorflowPose {
 		this.undetectedDuration = 0;
 	}
 
-	async asyncInit() {
+	async asyncInit(runtime, modelType) {
 		this.detector = await poseDetection
 			.createDetector(poseDetection.SupportedModels.BlazePose, {
-				runtime: 'mediapipe',
-				modelType: 'lite',
+				runtime,
+				modelType,
 				enableSmoothing: true,
-				solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/pose',
+				solutionPath: runtime === 'mediapipe' && 'https://cdn.jsdelivr.net/npm/@mediapipe/pose',
 			})
 			.catch((err) => console.error(err));
 		this.enable();
 
 		this.loaded = true;
+	}
+
+	changeModel(backend, quality) {
+		this.loaded = false;
+		this.ready = false;
+		this.detector.dispose();
+		this.detector = null;
+		this.asyncInit(backend, quality);
 	}
 
 	async onRender({ dt }) {

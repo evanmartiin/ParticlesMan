@@ -3,7 +3,7 @@ function createPane(pane, instance, name) {
 
 	folder.addInput(instance, 'enabled', { label: 'Enabled' });
 
-	const bloomPass = folder.addFolder({ title: 'Bloom Pass', expanded: false });
+	const bloomPass = folder.addFolder({ title: 'Bloom', expanded: false });
 	bloomPass.addInput(instance.bloomPass, 'strength', {
 		min: 0,
 		max: 5,

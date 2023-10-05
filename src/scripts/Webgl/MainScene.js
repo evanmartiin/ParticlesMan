@@ -3,8 +3,7 @@ import { state } from '@scripts/State.js';
 import { Avatar } from './Objects/Avatar.js';
 import { Lights } from './Objects/Lights.js';
 import { Particles } from './Objects/Particles/Particles.js';
-
-// import { Room } from './Objects/Room.js';
+import { Room } from './Objects/Room.js';
 
 class MainScene extends Scene {
 	constructor() {
@@ -19,8 +18,8 @@ class MainScene extends Scene {
 		this.lights = new Lights();
 		this.add(this.lights);
 
-		// this.room = new Room();
-		// this.add(this.room);
+		this.room = new Room();
+		this.add(this.room);
 	}
 }
 

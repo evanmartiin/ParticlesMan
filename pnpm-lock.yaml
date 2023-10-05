@@ -8,7 +8,6 @@ specifiers:
   eslint-config-prettier: ^8.6.0
   eslint-plugin-html: ^7.1.0
   eslint-plugin-prettier: ^4.2.1
-  gsap: ^3.11.5
   prettier: ^2.8.4
   sass: ^1.58.0
   stats-js: ^1.0.1
@@ -20,7 +19,6 @@ specifiers:
 
 dependencies:
   '@types/three': 0.149.0
-  gsap: 3.12.2
   three: 0.149.0
   three-custom-shader-material: 5.2.1_three@0.149.0
 
@@ -976,10 +974,6 @@ packages:
   /graphemer/1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
-
-  /gsap/3.12.2:
-    resolution: {integrity: sha512-EkYnpG8qHgYBFAwsgsGEqvT1WUidX0tt/ijepx7z8EUJHElykg91RvW1XbkT59T0gZzzszOpjQv7SE41XuIXyQ==}
-    dev: false
 
   /has-flag/3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}

@@ -27,9 +27,11 @@ class MainCamera extends PerspectiveCamera {
 	async toggleOrbit() {
 		const OrbitThree = await import('three/addons/controls/OrbitControls.js');
 		this.orbitControls = new OrbitThree.OrbitControls(this, app.$wrapper);
-		this.orbitControls.enableDamping = true;
-		this.orbitControls.dampingFactor = 0.15;
 		this.orbitControls.enableZoom = true;
+		this.orbitControls.minDistance = 4;
+		this.orbitControls.maxDistance = 10;
+		this.orbitControls.enablePan = false;
+		this.orbitControls.enableRotate = false;
 		this.orbitControls.target.copy(app.webgl.camera.target);
 		this.orbitControls.update();
 		this.far = 200;

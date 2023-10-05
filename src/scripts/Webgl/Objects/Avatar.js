@@ -24,8 +24,8 @@ import { POSE, POSE_CONNECTIONS } from '@utils/constants.js';
 import { app } from '@scripts/App.js';
 import { state } from '@scripts/State.js';
 import { VIDEO_SIZE } from '@scripts/Tensorflow/TensorflowCamera.js';
-import meshFragmentShader from '../Materials/ParticulesMan/skinnedMesh/fragment.glsl';
-import meshVertexShader from '../Materials/ParticulesMan/skinnedMesh/vertex.glsl';
+import meshFragmentShader from '../Materials/ParticulesMan/fragment.glsl';
+import meshVertexShader from '../Materials/ParticulesMan/vertex.glsl';
 
 const DUMMY = new Object3D();
 const TORSO_CYLINDER_NB = 10;

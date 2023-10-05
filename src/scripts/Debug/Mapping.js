@@ -26,7 +26,7 @@ class Mapping {
 
 	init() {
 		/** @type import('tweakpane').BladeApi */
-		this.#globalPane = new this.#Tweakpane.Pane({ title: 'Debug', expanded: false });
+		this.#globalPane = new this.#Tweakpane.Pane({ title: 'Debug', expanded: true });
 		this.#globalPane.registerPlugin(EssentialsPlugin);
 	}
 

@@ -1,5 +1,6 @@
-import { AmbientLight, Group, PointLight, PointLightHelper } from 'three';
-import { app } from '@scripts/App.js';
+import { Group, PointLight } from 'three';
+import lights from '@utils/lights.json';
+// import { app } from '@scripts/App.js';
 import { state } from '@scripts/State.js';
 
 export class Lights extends Group {
@@ -7,33 +8,42 @@ export class Lights extends Group {
 		super();
 		state.register(this);
 		this.lights = this.createLights();
+		this.lightConfigs = lights.configs;
+		this.currentConfig = 0;
+
+		this.setLightConfig(0);
 	}
 
 	onAttach() {
-		app.debug?.mapping.add(this, 'Lights');
+		// app.debug?.mapping.add(this, 'Lights');
 	}
 
 	createLights() {
-		const light1 = new PointLight('#ff3939', 1);
-		light1.position.set(-7.4, 10, 0);
+		const light1 = new PointLight();
+		const light2 = new PointLight();
+		const light3 = new PointLight();
+		this.add(light1, light2, light3);
+		return { light1, light2, light3 };
+	}
 
-		const helper1 = new PointLightHelper(light1, 1);
+	setLightConfig(config) {
+		const newConfig = this.lightConfigs[config];
+		['light1', 'light2', 'light3'].forEach((lightName) => {
+			const light = this.lights[lightName];
+			const { r, g, b } = newConfig[lightName].color;
+			light.color.setRGB(r, g, b);
+			light.intensity = newConfig[lightName].intensity;
+			const { x, y, z } = newConfig[lightName].position;
+			light.position.set(x, y, z);
+		});
+		this.currentConfig = config;
+	}
 
-		const light2 = new PointLight('#96EF61', 0.4);
-		light2.position.set(7.4, 10, 0);
-
-		const helper2 = new PointLightHelper(light2, 1);
-
-		const light3 = new PointLight('#ffffff', 0.1);
-		light3.position.set(0, 1, 3);
-
-		const helper3 = new PointLightHelper(light3, 1);
-		helper3.visible = false;
-
-		const light4 = new AmbientLight('#ffffff', 0);
-
-		this.add(light1, light2, light3, light4);
-
-		return { light1, light2, light3, light4, helper1, helper2, helper3 };
+	onPointerDown() {
+		let randomConfig;
+		do {
+			randomConfig = Math.floor(Math.random() * this.lightConfigs.length);
+		} while (randomConfig === this.currentConfig);
+		this.setLightConfig(randomConfig);
 	}
 }

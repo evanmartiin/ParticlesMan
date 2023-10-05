@@ -1,4 +1,4 @@
-import { BoxGeometry, OctahedronGeometry, SphereGeometry } from 'three';
+import { BoxGeometry, ConeGeometry, OctahedronGeometry, SphereGeometry } from 'three';
 
 function createPane(pane, instance, name) {
 	const folder = pane.addFolder({ title: name, expanded: false });
@@ -11,12 +11,7 @@ function createPane(pane, instance, name) {
 		particleGeometry: 0,
 	};
 
-	const geometries = [
-		new OctahedronGeometry().scale(0.004, 0.005, 0.012),
-		new BoxGeometry().scale(0.005, 0.004, 0.012),
-		new SphereGeometry().scale(0.005, 0.005, 0.005),
-		new BoxGeometry().scale(0.005, 0.005, 0.005),
-	];
+	const geometries = [new OctahedronGeometry(1, 0).scale(5, 1, 1), new BoxGeometry(), new SphereGeometry(1, 5, 5), new ConeGeometry(1, 5)];
 
 	folder
 		.addInput(instance.PARAMS, 'uCurlSize', {
@@ -57,8 +52,9 @@ function createPane(pane, instance, name) {
 				Octahedron: 0,
 				Box: 1,
 				Sphere: 2,
-				Cube: 3,
+				Cone: 3,
 			},
+			label: 'Geometry',
 		})
 		.on('change', updateGeometry);
 
@@ -72,7 +68,18 @@ function createPane(pane, instance, name) {
 
 	function updateGeometry() {
 		instance.changeGeometry(geometries[instance.PARAMS.particleGeometry]);
+		update();
 	}
+
+	instance.onPointerDown = () => {
+		instance.PARAMS.uCurlSize = Math.random() * 0.2 + 0.01;
+		instance.PARAMS.uSpeed = Math.random() * 1.5 + 0.01;
+		instance.PARAMS.uDieSpeed = Math.random() * 0.05 + 0.01;
+		instance.PARAMS.uScale = Math.random() * 4 + 0.5;
+
+		instance.PARAMS.particleGeometry = Math.floor(Math.random() * geometries.length);
+		updateGeometry();
+	};
 
 	return folder;
 }

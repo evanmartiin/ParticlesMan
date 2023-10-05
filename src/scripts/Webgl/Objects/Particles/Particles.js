@@ -1,4 +1,3 @@
-import { gsap } from 'gsap';
 import { BufferGeometry, DoubleSide, Group, InstancedBufferAttribute, InstancedMesh, MeshStandardMaterial, OctahedronGeometry, Texture } from 'three';
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla';
 import vertexShader from '@Webgl/Materials/Particles/visual/vertex.vs';
@@ -19,7 +18,7 @@ export class Particles extends Group {
 
 	onAttach() {
 		this.sim = new GPUSimulation(app.webgl.renderer, this.size);
-		const baseGeometry = new OctahedronGeometry(1, 0).scale(1.25, 1.25, 1.25);
+		const baseGeometry = new OctahedronGeometry(1, 0).scale(5, 1, 1);
 		this.geometry = this.createGeometry(baseGeometry);
 		this.material = this.createMaterial();
 		this.mesh = this.createMesh();
@@ -31,19 +30,13 @@ export class Particles extends Group {
 	show() {
 		this.active = true;
 		this.visible = true;
-		gsap.to(this.material.uniforms.uScale, { value: 1, duration: 1 });
+		this.material.uniforms.uScale.value = 1;
 	}
 
 	hide() {
 		this.active = false;
-		gsap.to(this.material.uniforms.uScale, {
-			value: 0,
-			duration: 1,
-			onComplete: () => {
-				if (this.active) return;
-				this.visible = false;
-			},
-		});
+		this.visible = false;
+		this.material.uniforms.uScale.value = 0;
 	}
 
 	createGeometry(baseGeometry) {
@@ -97,6 +90,8 @@ export class Particles extends Group {
 	}
 
 	changeGeometry(newBaseGeometry) {
+		this.geometry.dispose();
+		this.material.dispose();
 		while (this.children.length) {
 			this.remove(this.children[0]);
 		}
