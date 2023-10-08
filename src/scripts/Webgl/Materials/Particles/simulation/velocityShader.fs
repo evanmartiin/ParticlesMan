@@ -142,9 +142,6 @@ void main() {
 	velocity += rigPosition * 75. - position;
 	velocity = curl(position * uCurlSize, uTime * uTimeScale, 0.1 + (1.0 - life) * 0.1) * 0.25;
 
-	if(life < 0.15) {
-		velocity = curl(position * uCurlSize * 0.5, uTime * uTimeScale, 0.1 + (1.0 - life) * 0.1);
-	}
 	velocity *= uSpeed;
 
 	gl_FragColor = vec4(velocity, life);

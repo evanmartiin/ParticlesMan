@@ -35,7 +35,7 @@ class PostProcessing {
 	}
 
 	addBloomPass() {
-		const unrealBloomPass = new UnrealBloomPass(new Vector2(), 0.6, 1, 0.0);
+		const unrealBloomPass = new UnrealBloomPass(new Vector2(), 0.8, 0.5, 0.0);
 		this.effectComposer.addPass(unrealBloomPass);
 
 		return unrealBloomPass;

@@ -18,7 +18,7 @@ export class Particles extends Group {
 
 	onAttach() {
 		this.sim = new GPUSimulation(app.webgl.renderer, this.size);
-		const baseGeometry = new OctahedronGeometry(1, 0).scale(5, 1, 1);
+		const baseGeometry = new OctahedronGeometry(1, 0).scale(4, 2, 2);
 		this.geometry = this.createGeometry(baseGeometry);
 		this.material = this.createMaterial();
 		this.mesh = this.createMesh();

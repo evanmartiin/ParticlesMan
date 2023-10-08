@@ -4,9 +4,9 @@ function createPane(pane, instance, name) {
 	const folder = pane.addFolder({ title: name, expanded: false });
 
 	instance.PARAMS = {
-		uCurlSize: 0.04,
-		uSpeed: 1,
-		uDieSpeed: 0.02,
+		uCurlSize: 0.03,
+		uSpeed: 0.75,
+		uDieSpeed: 0.015,
 		uScale: 1,
 		particleGeometry: 0,
 		quantity: 256,
@@ -65,8 +65,6 @@ function createPane(pane, instance, name) {
 				'16k': 128,
 				'65k': 256,
 				'262k': 512,
-				'1M': 1024,
-				'4M': 2048,
 			},
 			label: 'Quantity',
 		})
@@ -91,10 +89,9 @@ function createPane(pane, instance, name) {
 	}
 
 	instance.onPointerDown = () => {
-		instance.PARAMS.uCurlSize = Math.random() * 0.2 + 0.01;
-		instance.PARAMS.uSpeed = Math.random() * 1.5 + 0.01;
-		instance.PARAMS.uDieSpeed = Math.random() * 0.05 + 0.01;
-		instance.PARAMS.uScale = Math.random() * 4 + 0.5;
+		instance.PARAMS.uCurlSize = Math.random() * 0.03 + 0.015;
+		instance.PARAMS.uSpeed = Math.random() * 0.5 + 0.5;
+		instance.PARAMS.uScale = Math.random() * 0.35 + 1.0;
 
 		instance.PARAMS.particleGeometry = Math.floor(Math.random() * geometries.length);
 		updateGeometry();
