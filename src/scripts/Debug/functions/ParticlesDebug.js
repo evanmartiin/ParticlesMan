@@ -1,4 +1,6 @@
 import { BoxGeometry, ConeGeometry, OctahedronGeometry, SphereGeometry } from 'three';
+import { EVENTS } from '@utils/constants.js';
+import { state } from '@scripts/State.js';
 
 function createPane(pane, instance, name) {
 	const folder = pane.addFolder({ title: name, expanded: false });
@@ -10,9 +12,10 @@ function createPane(pane, instance, name) {
 		uScale: 1,
 		particleGeometry: 0,
 		quantity: 256,
+		autoRandom: false,
 	};
 
-	const geometries = [new OctahedronGeometry(1, 0).scale(5, 1, 1), new BoxGeometry(), new SphereGeometry(1, 5, 5), new ConeGeometry(1, 5)];
+	const geometries = [new OctahedronGeometry(1, 0).scale(4, 2, 2), new BoxGeometry(), new SphereGeometry(1, 5, 5), new ConeGeometry(1, 5)];
 
 	folder
 		.addInput(instance.PARAMS, 'uCurlSize', {
@@ -70,6 +73,12 @@ function createPane(pane, instance, name) {
 		})
 		.on('change', updateQuantity);
 
+	folder
+		.addInput(instance.PARAMS, 'autoRandom', {
+			label: 'Auto Random',
+		})
+		.on('change', updateAutoRandom);
+
 	function update() {
 		if (!instance.sim.velUniforms || !instance.sim.posUniforms) return;
 		instance.sim.velUniforms.uCurlSize.value = instance.PARAMS.uCurlSize;
@@ -86,6 +95,20 @@ function createPane(pane, instance, name) {
 	function updateQuantity() {
 		instance.changeQuantity(instance.PARAMS.quantity);
 		update();
+	}
+
+	let autoRandomInterval = null;
+
+	function updateAutoRandom() {
+		if (instance.PARAMS.autoRandom) {
+			autoRandomInterval = setInterval(() => {
+				state.emit(EVENTS.AUTO_RANDOM);
+				instance.onPointerDown();
+			}, 3000);
+		} else {
+			clearInterval(autoRandomInterval);
+			autoRandomInterval = null;
+		}
 	}
 
 	instance.onPointerDown = () => {

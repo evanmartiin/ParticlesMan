@@ -8,6 +8,7 @@ const EVENTS = {
 
 	TICK: i++,
 	RENDER: i++,
+	AUTO_RANDOM: i++,
 
 	POINTER_DOWN: i++,
 	KEY_DOWN: i++,

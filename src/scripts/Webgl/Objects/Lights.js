@@ -1,6 +1,5 @@
 import { Group, PointLight } from 'three';
 import lights from '@utils/lights.json';
-// import { app } from '@scripts/App.js';
 import { state } from '@scripts/State.js';
 
 export class Lights extends Group {
@@ -14,8 +13,8 @@ export class Lights extends Group {
 		this.setLightConfig(0);
 	}
 
-	onAttach() {
-		// app.debug?.mapping.add(this, 'Lights');
+	onAutoRandom() {
+		this.onPointerDown();
 	}
 
 	createLights() {

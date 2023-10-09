@@ -41,8 +41,6 @@ class State {
 	emit(id, ...args) {
 		this.#cache.set(id, args);
 		if (this.#listeners.has(id)) for (const fn of this.#listeners.get(id)) fn.call(this, ...args);
-
-		// Neeeded to emit the event on all the instances
 		this.#instances.forEach((instance) => this.#fireMethod(instance, id));
 	}
 
