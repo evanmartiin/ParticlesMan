@@ -20,4 +20,6 @@ function isAndroid() {
 
 const isMobile = () => isAndroid() || isiOS();
 
-export { DEBUG, BREAKPOINTS, isMobile };
+const AUDIO = url.has('audio');
+
+export { DEBUG, BREAKPOINTS, isMobile, AUDIO };

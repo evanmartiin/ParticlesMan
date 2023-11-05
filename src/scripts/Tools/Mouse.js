@@ -6,6 +6,7 @@ class Mouse {
 	constructor() {
 		state.register(this);
 		this.isDown = false;
+		this.hasClicked = false;
 	}
 
 	onAttach() {
@@ -24,6 +25,11 @@ class Mouse {
 		if (this.isDown) return;
 		this.isDown = true;
 		state.emit(EVENTS.POINTER_DOWN);
+
+		if (!this.hasClicked) {
+			this.hasClicked = true;
+			state.emit(EVENTS.FIRST_CLICK);
+		}
 	};
 }
 

@@ -5,6 +5,7 @@ import { globalUniforms } from '@utils/globalUniforms.js';
 import { app } from '@scripts/App.js';
 import { state } from '@scripts/State.js';
 import { GPUSimulation } from './GPUSimulation.js';
+import { AUDIO } from '@utils/config.js';
 
 export class Particles extends Group {
 	constructor(size, coords, acceleration) {
@@ -69,6 +70,7 @@ export class Particles extends Group {
 				velMap: { value: new Texture() },
 				uSize: { value: this.size },
 				uScale: { value: 0 },
+				uAudioScale: { value: 0 },
 			},
 			side: DoubleSide,
 			metalness: 0.6,
@@ -112,6 +114,7 @@ export class Particles extends Group {
 
 		this.material.uniforms.posMap.value = this.sim.gpuCompute.getCurrentRenderTarget(this.sim.pos).texture;
 		this.material.uniforms.velMap.value = this.sim.gpuCompute.getCurrentRenderTarget(this.sim.vel).texture;
+		if (AUDIO) this.material.uniforms.uAudioScale.value = app.tools.audio.frequencyData;
 
 		this.sim.gpuCompute.compute();
 	}

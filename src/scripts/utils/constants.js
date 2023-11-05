@@ -12,6 +12,7 @@ const EVENTS = {
 
 	POINTER_DOWN: i++,
 	KEY_DOWN: i++,
+	FIRST_CLICK: i++,
 
 	PLAYER_ENTERED: i++,
 	PLAYER_LEFT: i++,

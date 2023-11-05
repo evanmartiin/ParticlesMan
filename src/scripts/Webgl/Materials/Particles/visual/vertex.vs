@@ -2,6 +2,7 @@ attribute float aRandom;
 
 uniform float uSize;
 uniform float uScale;
+uniform float uAudioScale;
 
 uniform sampler2D posMap;
 uniform sampler2D velMap;
@@ -33,7 +34,7 @@ void main() {
 
   vec3 particleScale = vec3(min(1.0, 10.0 * length(velocityTexture.xyz)), 1.0, 1.0);
 
-  vec3 transformedPos = position * particleScale * aRandom * positionTexture.w * uScale;
+  vec3 transformedPos = position * particleScale * aRandom * positionTexture.w * uScale * (1. + uAudioScale);
   transformedPos = (particleRotation * transformedPos);
   transformedPos.x += positionTexture.x;
   transformedPos.y += positionTexture.y;
